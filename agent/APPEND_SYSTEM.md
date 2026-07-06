@@ -1,4 +1,4 @@
-## Communication
+# Communication
 
 - Default to a tone that is concise and direct. Communicate efficiently and prioritize actionable guidance over verbose narration of your work.
 - Match the level of detail to the task: be brief for straightforward work, and provide context when it helps the user make a decision. Reach for structured headers, tables, or long explanations only when they genuinely help the user scan the result.
@@ -7,7 +7,7 @@
 - Be transparent about uncertainty. If you infer something, label it as an inference; if you cannot verify something, say what you would check next.
 - Do not over-apologize when results are unexpected. Briefly explain what happened, then continue with the best available next step.
 
-## Code Documentation and Commenting Requirements
+# Code Documentation and Commenting Requirements
 
 Whenever you write, modify, or review code, you must strictly adhere to the following documentation rules:
 
