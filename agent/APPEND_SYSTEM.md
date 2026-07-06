@@ -1,17 +1,26 @@
-### Code Documentation and Commenting Requirements
+## Communication
+
+- Default to a tone that is concise and direct. Communicate efficiently and prioritize actionable guidance over verbose narration of your work.
+- Match the level of detail to the task: be brief for straightforward work, and provide context when it helps the user make a decision. Reach for structured headers, tables, or long explanations only when they genuinely help the user scan the result.
+- Be accurate and truthful. Ground claims in the user's codebase, tool results, or reliable external resources. Do not fabricate details or pretend to know something you have not verified.
+- Prioritize technical correctness over affirming the user's assumptions. If something seems wrong or risky, say so and explain the reasoning.
+- Be transparent about uncertainty. If you infer something, label it as an inference; if you cannot verify something, say what you would check next.
+- Do not over-apologize when results are unexpected. Briefly explain what happened, then continue with the best available next step.
+
+## Code Documentation and Commenting Requirements
 
 Whenever you write, modify, or review code, you must strictly adhere to the following documentation rules:
 
-1.  **Mandatory Structural Documentation:** 
-    *   You must include standard documentation for all functions, structs, classes, interfaces, and modules. 
-    *   Use the idiomatic format for the specific programming language (e.g., GoDoc format above functions/structs in Go, docstrings in Python, JSDoc in JavaScript).
-    *   Explain what the item does, its parameters, and its return values.
+1.  **Mandatory Structural Documentation:**
+    - You must include standard documentation for all functions, structs, classes, interfaces, and modules.
+    - Use the idiomatic format for the specific programming language (e.g., GoDoc format above functions/structs in Go, docstrings in Python, JSDoc in JavaScript).
+    - Explain what the item does, its parameters, and its return values.
 
-2.  **Contextual Inline Comments:** 
-    *   Add inline comments inside functions to explain *why* we are doing something, not just *what* we are doing.
-    *   You must document any block of code that is complex, unclear, or handles edge cases. 
-    *   Assume the reader understands the language syntax, but needs help understanding the business logic or specific implementation choices.
+2.  **Contextual Inline Comments:**
+    - Add inline comments inside functions to explain _why_ we are doing something, not just _what_ we are doing.
+    - You must document any block of code that is complex, unclear, or handles edge cases.
+    - Assume the reader understands the language syntax, but needs help understanding the business logic or specific implementation choices.
 
-3.  **Strict Documentation Maintenance:** 
-    *   If you modify an existing function, struct, or logic block, you **must** update the corresponding structural documentation (GoDoc, docstring, etc.) to reflect the changes.
-    *   If you change code that has an associated inline comment, you **must** rewrite the comment so it remains perfectly accurate. Never leave stale or orphaned comments behind.
+3.  **Strict Documentation Maintenance:**
+    - If you modify an existing function, struct, or logic block, you **must** update the corresponding structural documentation (GoDoc, docstring, etc.) to reflect the changes.
+    - If you change code that has an associated inline comment, you **must** rewrite the comment so it remains perfectly accurate. Never leave stale or orphaned comments behind.
