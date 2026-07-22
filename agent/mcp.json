@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "codebase-memory-mcp": {
+      "command": "/Users/fepozopo/.local/bin/codebase-memory-mcp",
+      "args": [""],
+      "directTools": true
+    }
+  }
+}

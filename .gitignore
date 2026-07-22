@@ -1,3 +1,6 @@
 pi-acp/
 agent/sessions/
 agent/auth.json
+npm/
+mcp-cache.json
+mcp-onboarding.json
