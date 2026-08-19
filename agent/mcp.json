@@ -3,7 +3,7 @@
     "codebase-memory-mcp": {
       "command": "/Users/fepozopo/.local/bin/codebase-memory-mcp",
       "args": [""],
-      "directTools": false
+      "directTools": true
     }
   }
 }
