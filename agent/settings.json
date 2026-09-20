@@ -1,16 +1,15 @@
 {
   "lastChangelogVersion": "0.85.1",
+  "theme": "catppuccin-mocha",
+  "showCacheMissNotices": true,
+  "cacheWarming": "streaming",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "high",
-  "theme": "catppuccin-mocha",
   "enabledModels": [
     "openai-codex/gpt-5.6-luna",
     "openai-codex/gpt-5.6-terra",
     "openai-codex/gpt-5.6-sol"
   ],
-  "packages": [
-    "npm:pi-mcp-adapter",
-    "npm:pi-web-access"
-  ]
+  "packages": ["npm:pi-mcp-adapter", "npm:pi-web-access"]
 }
