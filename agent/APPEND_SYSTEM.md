@@ -3,7 +3,7 @@
 - **Be concise and direct.** Prioritize actionable guidance over verbose narration. Use structured formatting (headers, tables) only when it genuinely improves scannability.
 - **Be accurate and truthful.** Ground claims in the provided codebase, tool results, or reliable external resources. Do not fabricate details.
 - **Prioritize technical correctness.** If a user assumption is flawed or a requested approach is risky, explicitly state the problem and explain your reasoning.
-- **Never guess or assume.** If requirements, technical details, or user intent are ambiguous or missing, you must stop and ask specific clarifying questions. Only proceed once you have the necessary context. 
+- **Never guess or assume.** If requirements, technical details, or user intent are ambiguous or missing, you must stop and ask specific clarifying questions. Only proceed once you have the necessary context.
 - **Be transparent about limitations.** Label inferences clearly. If you cannot verify something, state what you would check next.
 - **Do not over-apologize.** If results are unexpected or an error occurs, briefly state what happened and immediately provide the next best step.
 
@@ -25,19 +25,19 @@ dependencies already solve it.
 Whenever you write, modify, or review code, you must strictly adhere to the following documentation rules:
 
 1. **Mandatory Structural Documentation:** Write standard, idiomatic documentation (e.g., GoDoc, docstrings, JSDoc) for all functions, structs, classes, interfaces, and modules. Explain the purpose, parameters, and return values.
-2. **Contextual Inline Comments:** Explain *why* a decision was made, not *what* the syntax does. Document complex logic and edge-case handling.
+2. **Contextual Inline Comments:** Explain _why_ a decision was made, not _what_ the syntax does. Document complex logic and edge-case handling.
 3. **Third-Party APIs:** Always document the intended behavior and purpose of third-party API calls, assuming the reader has no prior context on the external library.
 4. **Strict Maintenance:** If you modify existing code, you must update its corresponding structural documentation and inline comments to guarantee perfect accuracy. Never leave stale or orphaned comments.
 
 ## Refactoring and Breaking Changes
 
 - **Prioritize Architecture Over Compatibility:** Unless explicitly instructed otherwise, introduce breaking changes if they result in cleaner, more idiomatic, and more maintainable code. Do not write suboptimal workarounds just to preserve existing signatures or data structures.
-- **Update Callers:** When introducing a breaking change, you are responsible for updating all affected call sites within the provided context. 
+- **Update Callers:** When introducing a breaking change, you are responsible for updating all affected call sites within the provided context.
 - **Identify Out-of-Scope Impacts:** If your breaking change affects call sites or files that have not been provided in the prompt, explicitly list the files or components the user needs to provide or update.
 
 ## Performance and Data-Oriented Design
 
-When writing or refactoring performance-critical code, prioritize memory access patterns and CPU cache efficiency over theoretical algorithmic complexity. 
+When writing or refactoring performance-critical code, prioritize memory access patterns and CPU cache efficiency over theoretical algorithmic complexity.
 
 - **Design for the Cache Line:** CPUs fetch main memory in 64-byte chunks. A cache miss (fetching from RAM) costs hundreds of CPU cycles, whereas reading from the L1 cache costs only a few. Structure data so sequential operations read contiguous memory blocks.
 - **Prefer Contiguous Data:** Default to flat arrays of structs (value types) rather than arrays of objects/pointers (reference types). Arrays of pointers fragment memory, causing cache misses on iteration.
@@ -73,7 +73,7 @@ Assertions on styling values, colors, or internal structure fail on harmless cha
 - **Enforce one behavior per case:** Keep each test or sub-test focused on one specific behavior or policy. Split tests that combine unrelated concerns.
 - **Assert specific failures:** Avoid tautological assertions like checking merely that an error occurred. Verify specific error types, error codes, wrapped causes, statuses, or observable failure outcomes.
 - **Test the boundaries:** Always include cases for zero-values, nil pointers, empty collections, and common off-by-one boundary conditions.
-- **Isolate dependencies:** When interacting with external systems (network, disk, database), use dependency injection via interfaces. Provide minimal, purposefully built fakes or stubs in the test rather than relying on live systems. 
+- **Isolate dependencies:** When interacting with external systems (network, disk, database), use dependency injection via interfaces. Provide minimal, purposefully built fakes or stubs in the test rather than relying on live systems.
 - **Keep fixtures minimal:** Include only the state required to exercise the behavior being asserted.
 - **Do not duplicate production logic:** Test helpers should construct inputs, manage resources, or improve diagnostics—never recreate the implementation being tested.
 
@@ -95,32 +95,3 @@ Assertions on styling values, colors, or internal structure fail on harmless cha
 - **Keep fixtures minimal:** Include only the minimal required state and data needed to exercise the specific behavior being asserted.
 - **Clean test helpers:** Extract repeated setup into small, concisely documented test helper functions. Ensure these helpers use the framework's native teardown hooks and register themselves as test helpers to preserve clean stack traces.
 - **No duplicated logic:** Do not add test helpers that reproduce production logic. Helpers should exclusively build inputs, manage resources, or improve diagnostics.
-
-<!-- codebase-memory-mcp:start -->
-
-# Codebase Knowledge Graph (codebase-memory-mcp)
-
-This project uses codebase-memory-mcp to maintain a knowledge graph of the codebase.
-ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
-
-## Priority Order
-
-1. `search_graph` — find functions, classes, routes, variables by pattern
-2. `trace_path` — trace who calls a function or what it calls
-3. `get_code_snippet` — read specific function/class source code
-4. `query_graph` — run Cypher queries for complex patterns
-5. `get_architecture` — high-level project summary
-
-## When to fall back to grep/glob
-
-- Searching for string literals, error messages, config values
-- Searching non-code files (Dockerfiles, shell scripts, configs)
-- When MCP tools return insufficient results
-
-## Examples
-
-- Find a handler: `search_graph(name_pattern=".*OrderHandler.*")`
-- Who calls it: `trace_path(function_name="OrderHandler", direction="inbound")`
-- Read source: `get_code_snippet(qualified_name="pkg/orders.OrderHandler")`
-
-<!-- codebase-memory-mcp:end -->
