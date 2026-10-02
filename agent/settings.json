@@ -1,5 +1,6 @@
 {
-  "lastChangelogVersion": "0.99.2",
+  "lastChangelogVersion": "1.0.0",
+  "tuiMode": "regular",
   "theme": "catppuccin-mocha",
   "showCacheMissNotices": true,
   "cacheWarming": "streaming",
