@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.0.1",
   "tuiMode": "regular",
   "theme": "catppuccin-mocha",
   "showCacheMissNotices": true,
@@ -12,5 +12,7 @@
     "openai-codex/gpt-6-astra",
     "openai-codex/gpt-6.1-sol"
   ],
-  "packages": ["npm:pi-web-access"]
+  "packages": [
+    "npm:pi-web-access"
+  ]
 }
