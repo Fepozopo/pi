@@ -5,4 +5,5 @@ npm/
 mcp-cache.json
 mcp-onboarding.json
 models-store.json
+agent/trust.json
 web-search-cache/
