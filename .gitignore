@@ -7,3 +7,4 @@ mcp-onboarding.json
 models-store.json
 agent/trust.json
 web-search-cache/
+agent/cache/

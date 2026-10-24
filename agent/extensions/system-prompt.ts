@@ -1,9 +1,10 @@
 /**
  * /system-prompt — Display the full system prompt and tool definitions
  * in a full-screen scrollable overlay.
+ * Uses Pi's host-provided types and TUI helpers for keyboard input and ANSI-aware layout.
  */
-import type { ExtensionAPI, Theme, ToolDefinition } from "@mariozechner/pi-coding-agent";
-import { matchesKey, visibleWidth, wrapTextWithAnsi } from "@mariozechner/pi-tui";
+import type { ExtensionAPI, Theme, ToolDefinition } from "@earendil-works/pi-coding-agent";
+import { matchesKey, visibleWidth, wrapTextWithAnsi } from "@earendil-works/pi-tui";
 
 export default function (pi: ExtensionAPI) {
   // Listen for date from pi-today extension
