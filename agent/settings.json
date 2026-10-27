@@ -1,6 +1,6 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "1.3.0",
+  "lastChangelogVersion": "1.4.0",
   "tuiMode": "regular",
   "theme": "catppuccin-mocha",
   "showCacheMissNotices": true,
@@ -10,8 +10,9 @@
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6.1-sol"
+    "openai-codex/gpt-6.1-terra",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-astra"
   ],
   "packages": [
     "npm:pi-web-access"
