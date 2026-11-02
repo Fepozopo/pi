@@ -8,3 +8,4 @@ models-store.json
 agent/trust.json
 web-search-cache/
 agent/cache/
+agent/pi-web-access/
