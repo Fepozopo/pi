@@ -3,6 +3,7 @@
  *
  * Single question: simple options list
  * Multiple questions: tab bar navigation between questions
+ * Reports waiting-for-input status while the inline questionnaire is open.
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
@@ -81,6 +82,11 @@ function errorResult(
 	};
 }
 
+/**
+ * Register a question tool that reports when its inline UI is waiting for input.
+ * @param pi Host API used to register the tool and its transcript renderers.
+ * @returns Nothing; the tool is registered for this extension runtime.
+ */
 export default function questionnaire(pi: ExtensionAPI) {
 	pi.registerTool({
 		name: "questionnaire",
@@ -89,6 +95,15 @@ export default function questionnaire(pi: ExtensionAPI) {
 			"Ask the user one or more questions. Use for clarifying requirements, getting preferences, or confirming decisions. For single questions, shows a simple option list. For multiple questions, shows a tab-based interface.",
 		parameters: QuestionnaireParams,
 
+		/**
+		 * Collect answers in an inline UI, or return a cancellation/error result.
+		 * @param _toolCallId Host-assigned call ID (unused).
+		 * @param params Questions to present.
+		 * @param _signal Host cancellation signal (unused).
+		 * @param _onUpdate Progress callback (unused).
+		 * @param ctx Tool context providing the interactive UI.
+		 * @returns Model-facing answers and structured details for rendering.
+		 */
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
 			if (ctx.mode !== "tui") {
 				return errorResult("Error: UI not available (running in non-interactive mode)");
@@ -391,6 +406,9 @@ export default function questionnaire(pi: ExtensionAPI) {
 					},
 					handleInput,
 				};
+			}, {
+				// Pi custom screens can also be loaders; explicitly mark this one as awaiting input.
+				blocked: { kind: "question", message: "Waiting for your answers" },
 			});
 
 			if (result.cancelled) {

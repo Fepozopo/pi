@@ -10,16 +10,23 @@
  *   My node version is !{node --version}
  *
  * The !{command} patterns are executed and replaced with their output before
- * the prompt is sent to the agent.
+ * the prompt is sent to the agent. Combined stdout/stderr is capped at Pi's
+ * standard tool-output byte limit; truncated output includes an explicit warning.
  *
  * Note: Regular !command syntax (whole-line bash) is preserved and works as before.
  */
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { DEFAULT_MAX_BYTES, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-export default function (pi: ExtensionAPI) {
+/**
+ * Register inline command expansion with bounded output and truncation warnings.
+ * @param pi Host API used to register input handling and execute commands.
+ * @returns Nothing; registration installs the input handler for this runtime.
+ */
+export default function (pi: ExtensionAPI): void {
 	const PATTERN = /!\{([^}]+)\}/g;
 	const TIMEOUT_MS = 30000;
 
+	/** Expand inline commands in the incoming event; preserve images and report failures through ctx.ui. */
 	pi.on("input", async (event, ctx) => {
 		const text = event.text;
 
@@ -51,24 +58,26 @@ export default function (pi: ExtensionAPI) {
 		// Execute each command and collect results
 		for (const { full, command } of matches) {
 			try {
+				// Pi enforces a combined stdout/stderr cap and terminates overflowing commands.
 				const bashResult = await pi.exec("bash", ["-c", command], {
 					timeout: TIMEOUT_MS,
+					maxBuffer: DEFAULT_MAX_BYTES,
 				});
 
 				const output = bashResult.stdout || bashResult.stderr || "";
 				const trimmed = output.trim();
 
-				if (bashResult.code !== 0 && bashResult.stderr) {
-					expansions.push({
-						command,
-						output: trimmed,
-						error: `exit code ${bashResult.code}`,
-					});
-				} else {
-					expansions.push({ command, output: trimmed });
-				}
+				const error = bashResult.truncated
+					? `output truncated: exceeded ${DEFAULT_MAX_BYTES} bytes; command terminated`
+					: bashResult.code !== 0 ? `exit code ${bashResult.code}` : undefined;
+				expansions.push({ command, output: trimmed, error });
 
-				result = result.replace(full, trimmed);
+				// Keep the warning in model context too, including when no UI is available.
+				const replacement = bashResult.truncated
+					? `${trimmed}${trimmed ? "\n" : ""}[${error}]`
+					: trimmed;
+				// Command output is literal data, not String.replace's $-substitution syntax.
+				result = result.replace(full, () => replacement);
 			} catch (err) {
 				const errorMsg = err instanceof Error ? err.message : String(err);
 				expansions.push({ command, output: "", error: errorMsg });
