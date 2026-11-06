@@ -1,7 +1,11 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "1.4.0",
-  "selfUpdateCommand": ["brew", "upgrade", "pi-coding-agent"],
+  "lastChangelogVersion": "1.5.0",
+  "selfUpdateCommand": [
+    "brew",
+    "upgrade",
+    "pi-coding-agent"
+  ],
   "tuiMode": "regular",
   "theme": "catppuccin-mocha",
   "showCacheMissNotices": true,
@@ -15,5 +19,10 @@
     "openai-codex/gpt-6.1-sol",
     "openai-codex/gpt-6-astra"
   ],
-  "packages": ["npm:pi-web-access"]
+  "packages": [
+    "npm:pi-web-access"
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0"
+  }
 }
